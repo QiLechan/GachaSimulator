@@ -81,13 +81,12 @@
     <ClCompile Include="qrc_qml.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="D:\GachaSimulator\GachaSimulator\x64\Debug\qt\qmake\import.qml" />
     <CustomBuild Include="qml.qrc">
       <FileType>Document</FileType>
-      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">qml.qrc;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe;D:\GachaSimulator\GachaSimulator\x64\Debug\qt\qmake\import.qml;%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp</Command>
-      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">RCC qml.qrc</Message>
-      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">qrc_qml.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">qml.qrc;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp&#x0d;&#x0a;if errorlevel 1 goto VCEnd&#x0d;&#x0a;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp&#x0d;&#x0a;if errorlevel 1 goto VCEnd&#x0d;&#x0a;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp&#x0d;&#x0a;if errorlevel 1 goto VCEnd&#x0d;&#x0a;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp&#x0d;&#x0a;if errorlevel 1 goto VCEnd&#x0d;&#x0a;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp&#x0d;&#x0a;if errorlevel 1 goto VCEnd&#x0d;&#x0a;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp&#x0d;&#x0a;if errorlevel 1 goto VCEnd&#x0d;&#x0a;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp&#x0d;&#x0a;if errorlevel 1 goto VCEnd&#x0d;&#x0a;D:\Qt\6.8.2\msvc2022_64\bin\rcc.exe -name qml --no-zstd qml.qrc -o qrc_qml.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">RCC qml.qrc, RCC qml.qrc, RCC qml.qrc, RCC qml.qrc, RCC qml.qrc, RCC qml.qrc, RCC qml.qrc, RCC qml.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">qrc_qml.cpp;qrc_qml.cpp;qrc_qml.cpp;qrc_qml.cpp;qrc_qml.cpp;qrc_qml.cpp;qrc_qml.cpp;qrc_qml.cpp;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

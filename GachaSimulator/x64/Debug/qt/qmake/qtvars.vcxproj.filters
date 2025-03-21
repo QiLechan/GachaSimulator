@@ -20,9 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="D:\GachaSimulator\GachaSimulator\x64\Debug\qt\qmake\import.qml">
-      <Filter>Resource Files</Filter>
-    </None>
     <CustomBuild Include="qml.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>

@@ -1,5 +1,4 @@
 ﻿   Qt/MSBuild: 3.3.1.1
    Qt: 6.8.2
   main.cpp
-  qrc_qml.cpp
-  GachaSimulator.vcxproj -> D:\GachaSimulator\x64\Debug\GachaSimulator.exe
+D:\GachaSimulator\GachaSimulator\main.cpp(16,29): error C3861: “createGenshinJson”: 找不到标识符

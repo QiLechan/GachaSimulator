@@ -32,6 +32,5 @@
     <None Include="main.qml">
       <Filter>Source Files</Filter>
     </None>
-
   </ItemGroup>
 </Project>

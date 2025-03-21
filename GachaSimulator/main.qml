@@ -1,17 +1,35 @@
 import QtQuick 2.9
-import QtQuick.Window 2.2
+import QtQuick.Controls
+import QtQuick.Dialogs
 
-Window {
+ApplicationWindow {
     visible: true
     width: 640
     height: 480
     title: "GachaSimulator"
-    Text {
-        anchors.fill: parent
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.bold: true
-        font.pointSize: 42
-        text: "Hello World!"
+
+    MessageDialog {
+        id: aboutDialog
+        buttons: MessageDialog.Ok
+        text: "GachaSimulator\n\nVersion: 1.0\nAuthor: QiLechan\nEmail:qilechan@outlook.com"
+    }
+
+    menuBar: MenuBar {
+        Menu {
+            title: qsTr("File")
+            MenuItem {
+                text: qsTr("Exit")
+                onTriggered: Qt.quit()
+            }
+        }
+        Menu {
+            title: qsTr("About")
+            MenuItem {
+                text: qsTr("About")
+                onTriggered: {
+                    aboutDialog.open()
+                }
+            }
+        }
     }
 }

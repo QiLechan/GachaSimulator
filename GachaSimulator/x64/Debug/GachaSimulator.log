@@ -1,0 +1,5 @@
+﻿   Qt/MSBuild: 3.3.1.1
+   Qt: 6.8.2
+  main.cpp
+  qrc_qml.cpp
+  GachaSimulator.vcxproj -> D:\GachaSimulator\x64\Debug\GachaSimulator.exe

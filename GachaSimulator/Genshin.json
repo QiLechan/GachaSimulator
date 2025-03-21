@@ -1,0 +1,49 @@
+{
+	"version":	"1.0.0",
+	"description":	"原神抽卡配置",
+	"global_config":	{
+		"max_pity_counter":	90,
+		"5star":	0.006,
+		"4star":	0.051,
+		"ten_times":	0.006
+	},
+	"pools":	[{
+			"pool_name":	"常驻祈愿",
+			"pool_type":	"角色",
+			"rates":	{
+				"5star_soft_pity_start":	74,
+				"5star_rate_increment":	0.06
+			},
+			"pity_rules":	{
+			},
+			"up":	{
+				"5star":	[{
+						"name":	"五星UP角色",
+						"id":	10001,
+						"weight":	5000
+					}],
+				"4star":	[{
+						"name":	"四星UP角色",
+						"id":	20001,
+						"weight":	5000
+					}]
+			},
+			"others":	{
+				"5star":	[{
+						"name":	"五星角色",
+						"id":	10001,
+						"weight":	5000
+					}],
+				"4star":	[{
+						"name":	"四星角色",
+						"id":	10001,
+						"weight":	5000
+					}],
+				"3star":	[{
+						"name":	"三星物品",
+						"id":	30001,
+						"weight":	10000
+					}]
+			}
+		}]
+}

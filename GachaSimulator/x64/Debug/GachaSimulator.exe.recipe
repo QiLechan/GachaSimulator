@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\GachaSimulator\x64\Debug\GachaSimulator.exe</FullPath>
+      <FullPath>D:\code\GachaSimulator\GachaSimulator\x64\Debug\GachaSimulator.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

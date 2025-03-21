@@ -4,7 +4,7 @@
 #include <cjson/cJSON.h>
 #include <stdbool.h>
 
-#ifdef _cplusplus
+#ifndef _cplusplus
 extern "C"
 {
     char* createGenshinJson();

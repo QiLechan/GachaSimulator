@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <GachaSimulatorLib/GachaSimulatorLib.h>
+#include <FileProcessor.h>
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +26,8 @@ int main(int argc, char *argv[])
     }
 
     QGuiApplication app(argc, argv);
+
+	qmlRegisterType<FileProcessor>("fileprocessor", 1, 0, "FileProcessor");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/qt/qml/gachasimulator/main.qml")));

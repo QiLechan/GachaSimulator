@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls
 import QtQuick.Dialogs
-import fileprocessor 1.0
+import utils 1.0
 
 ApplicationWindow {
     visible: true
@@ -15,8 +15,8 @@ ApplicationWindow {
         text: "GachaSimulator\n\nVersion: 1.0\nAuthor: QiLechan\nEmail:qilechan@outlook.com"
     }
     
-    FileProcessor {
-        id: fileProcessor
+    Utils {
+        id: utils
     }
 
     FileDialog {
@@ -28,7 +28,7 @@ ApplicationWindow {
         fileMode: FileDialog.OpenFile
         onAccepted: {
             const file = selectedFile.toString();
-            fileProcessor.processFile(file);
+            utils.processFile(file);
         }
     }
 

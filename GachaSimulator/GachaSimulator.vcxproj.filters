@@ -32,12 +32,12 @@
     <None Include="main.qml">
       <Filter>Source Files</Filter>
     </None>
-    <ClCompile Include="FileProcessor.cpp">
+    <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="FileProcessor.h">
+    <QtMoc Include="utils.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

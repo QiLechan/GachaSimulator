@@ -12,4 +12,5 @@ class Utils : public QObject {
 	Q_OBJECT
 public:
 	Q_INVOKABLE void processFile(const QString& filePath);
+	Q_INVOKABLE void gacha(int counts);
 };

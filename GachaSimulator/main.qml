@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls
 import QtQuick.Dialogs
+import QtQuick.Controls
 import utils 1.0
 
 ApplicationWindow {
@@ -54,6 +55,13 @@ ApplicationWindow {
                     aboutDialog.open()
                 }
             }
+        }
+    }
+    Button {
+        text: "10"
+        highlighted: true
+        onClicked: {
+            utils.gacha(10);
         }
     }
 }

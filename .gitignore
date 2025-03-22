@@ -56,3 +56,4 @@ compile_commands.json
 /.vs/GachaSimulator
 /.vs
 GachaSimulator/x64/
+/GachaSimulator/result.txt

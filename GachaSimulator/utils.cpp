@@ -9,15 +9,19 @@ void Utils::GachaThead::gacha(int counts) {
 		qDebug() << "解析配置失败";
 		return;
 	}
+    fopen_s(&fp, "result.txt", "wb");
 	for (int i = 0; i < counts; i++) {
-        Probability* prob = probability(i, &config->global, &config->pools[0]);
+        Probability* prob = probability(global_count, &config->global, &config->pools[0]);
 		global_count++;
         int result = Gacha(prob);
         Item* item = return_Item(&config->pools[0], result, up5star_ptr);
-		fopen_s(&fp, "result.txt", "wb");
+		qDebug() << "第" << global_count << "次抽卡结果:" << item->name;
+        if (result == 5)
+            global_count = 0;
+		parse_result(item, fp);
 		free(prob);
-		fclose(fp);
 	}
+    fclose(fp);
 }
 void Utils::GachaThead::setCounts(int counts) {
 	this->counts = counts;

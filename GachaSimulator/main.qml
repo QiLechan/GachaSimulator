@@ -61,7 +61,7 @@ ApplicationWindow {
         text: "10"
         highlighted: true
         onClicked: {
-            utils.gacha(10);
+            utils.runThread(10);
         }
     }
 }

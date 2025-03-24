@@ -5,12 +5,26 @@
 #include <QByteArray>
 #include <QUrl>
 #include <stdbool.h>
+#include <qthread.h>
 #include <GachaSimulatorLib/GachaSimulatorLib.h>
 using namespace std;
 
+
 class Utils : public QObject {
 	Q_OBJECT
+private:
+	class GachaThead : public QThread{
+	private:
+		int counts = NULL;
+		bool up5star = false;
+		bool* up5star_ptr = &up5star;
+		FILE* fp;
+	public:
+		void setCounts(int counts);
+		void gacha(int counts);
+		void run();
+	};
 public:
 	Q_INVOKABLE void processFile(const QString& filePath);
-	Q_INVOKABLE void gacha(int counts);
+	Q_INVOKABLE void runThread(int counts);
 };

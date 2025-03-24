@@ -10,6 +10,26 @@ ApplicationWindow {
     height: 720
     title: "GachaSimulator"
 
+    property string messageText: ""
+
+    Dialog {
+        id: messagedialog
+        title: "提示"
+        standardButtons: Dialog.Ok
+        anchors.centerIn: parent
+        Label {
+            text: messageText
+        }
+    }
+
+    Connections {
+        target: utils
+        function onShowMessageBox(message) {
+            messagedialog.messageText = message;
+            messagedialog.open();
+        }
+    }
+
     MessageDialog {
         id: aboutDialog
         buttons: MessageDialog.Ok
@@ -37,20 +57,26 @@ ApplicationWindow {
         Menu {
             title: qsTr("File")
             MenuItem {
-                text: qsTr("Open")
+                text: qsTr("打开配置文件")
                 onTriggered: {
                     fileDialog.open()
                 }
             }
             MenuItem {
-                text: qsTr("Exit")
+                text: qsTr("关闭文件")
+                onTriggered: {
+                    utils.closeFile();
+                }
+            }
+            MenuItem {
+                text: qsTr("退出")
                 onTriggered: Qt.quit()
             }
         }
         Menu {
-            title: qsTr("About")
+            title: qsTr("帮助")
             MenuItem {
-                text: qsTr("About")
+                text: qsTr("关于")
                 onTriggered: {
                     aboutDialog.open()
                 }
@@ -61,7 +87,7 @@ ApplicationWindow {
         text: "10"
         highlighted: true
         onClicked: {
-            utils.runThread(10);
+            utils.run_gacha_thread(10);
         }
     }
 }

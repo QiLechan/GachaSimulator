@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.Controls
+import QtQml
 import utils 1.0
 
 ApplicationWindow {
@@ -9,26 +10,6 @@ ApplicationWindow {
     width: 1280
     height: 720
     title: "GachaSimulator"
-
-    property string messageText: ""
-
-    Dialog {
-        id: messagedialog
-        title: "提示"
-        standardButtons: Dialog.Ok
-        anchors.centerIn: parent
-        Label {
-            text: messageText
-        }
-    }
-
-    Connections {
-        target: utils
-        function onShowMessageBox(message) {
-            messagedialog.messageText = message;
-            messagedialog.open();
-        }
-    }
 
     MessageDialog {
         id: aboutDialog
@@ -39,6 +20,27 @@ ApplicationWindow {
     Utils {
         id: utils
     }
+
+    Dialog {
+        id: messagedialog
+        title: "提示"
+        standardButtons: Dialog.Ok
+        anchors.centerIn: parent
+        property string messageText: ""
+        Label {
+            text: messagedialog.messageText
+        }
+    }
+
+    Connections {
+        target: utils
+        function onShowMessageBox(message) {
+            console.log(message);
+            messagedialog.messageText = message;
+            messagedialog.open();
+        }
+    }
+
 
     FileDialog {
         id: fileDialog

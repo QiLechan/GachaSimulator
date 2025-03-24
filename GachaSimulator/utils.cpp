@@ -6,8 +6,6 @@ int global_count = 0;
 void Utils::GachaThead::gacha(int counts) {
 	GachaConfig* config = parse_config(json);
 	if (config == NULL) {
-		Utils utils;
-		utils.onMessageBoxShow("未选择配置文件");
 		qDebug() << "未选择配置文件";
 		return;
 	}
@@ -73,6 +71,11 @@ void Utils::processFile(const QString& filePath) {
 }
 
 void Utils::run_gacha_thread(int counts) {
+    if (json == NULL) {
+		onMessageBoxShow("未选择配置文件");
+		qDebug() << "未打开文件";
+		return;
+    }
     GachaThead* thread = new GachaThead();
     thread->setCounts(counts);
     thread->start(); 
@@ -88,5 +91,5 @@ void Utils::closeFile() {
 }
 
 void Utils::onMessageBoxShow(const QString& message) {
-	emit ShowMessageBox(message);    //转发信号
+	emit showMessageBox(message);    //转发信号
 }

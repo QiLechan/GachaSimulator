@@ -26,11 +26,12 @@ private:
 		void run();
 	};
 public:
+	explicit Utils(QObject* parent = nullptr) : QObject(parent) {};
 	Q_INVOKABLE void processFile(const QString& filePath);
 	Q_INVOKABLE void run_gacha_thread(int counts);
 	Q_INVOKABLE void closeFile();
 signals:
-	void ShowMessageBox(const QString& message);    //定义信号
+	void showMessageBox(const QString& message);    //定义信号
 public slots:
 	void onMessageBoxShow(const QString& message);  //定义槽
 };

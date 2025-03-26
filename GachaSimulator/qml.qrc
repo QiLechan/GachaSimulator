@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/qt/qml/gachasimulator">
         <file>main.qml</file>
+        <file>resource/background.png</file>
+        <file>resource/button.png</file>
     </qresource>
 </RCC>

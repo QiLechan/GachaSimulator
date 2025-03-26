@@ -9,6 +9,14 @@ ApplicationWindow {
     visible: true
     width: 1280
     height: 720
+    //禁止缩放窗口，因为懒得写自适应布局
+    minimumWidth: width
+    minimumHeight: height
+    maximumWidth: width
+    maximumHeight: height
+    //禁用最大化按钮
+    flags: Qt.Window | Qt.WindowTitleHint | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
+
     title: "GachaSimulator"
 
     MessageDialog {
@@ -41,6 +49,12 @@ ApplicationWindow {
         }
     }
 
+    Image {
+        id: background
+        source: "qrc:/qt/qml/gachasimulator/resource/background.png"
+        fillMode: Image.PreserveAspectCrop
+        anchors.centerIn: parent
+    }
 
     FileDialog {
         id: fileDialog
@@ -57,7 +71,7 @@ ApplicationWindow {
 
     menuBar: MenuBar {
         Menu {
-            title: qsTr("File")
+            title: qsTr("文件")
             MenuItem {
                 text: qsTr("打开配置文件")
                 onTriggered: {
@@ -85,11 +99,70 @@ ApplicationWindow {
             }
         }
     }
-    Button {
-        text: "10"
-        highlighted: true
-        onClicked: {
-            utils.run_gacha_thread(10);
+
+    Item {
+        id: tenButton
+        width: 267
+        height: 66
+    
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            rightMargin: 50
+            bottomMargin: 50
+        }
+
+        Image {
+            width: parent.width
+            height: parent.height
+            source: "qrc:/qt/qml/gachasimulator/resource/button.png"
+            fillMode: Image.PreserveAspectFit
+            anchors.centerIn: parent
+        
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    utils.run_gacha_thread(10)
+                }
+            }
+        }
+
+        Text {
+            text: "10"
+            anchors.centerIn: parent
+            font.pixelSize: 24   
+        }
+    }
+    Item {
+        id: oneButton
+        width: 267
+        height: 66
+    
+        anchors {
+            right: tenButton.left
+            rightMargin: 20
+            verticalCenter: tenButton.verticalCenter
+        }
+
+        Image {
+            width: parent.width
+            height: parent.height
+            source: "qrc:/qt/qml/gachasimulator/resource/button.png"
+            fillMode: Image.PreserveAspectFit
+            anchors.centerIn: parent
+        
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    utils.run_gacha_thread(1)
+                }
+            }
+        }
+
+        Text {
+            text: "1"
+            anchors.centerIn: parent
+            font.pixelSize: 24   
         }
     }
 }

@@ -18,7 +18,7 @@ ApplicationWindow {
     flags: Qt.Window | Qt.WindowTitleHint | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint
 
     title: "GachaSimulator"
-
+    
     MessageDialog {
         id: aboutDialog
         buttons: MessageDialog.Ok
@@ -28,7 +28,7 @@ ApplicationWindow {
     Utils {
         id: utils
     }
-
+    //定义消息框
     Dialog {
         id: messagedialog
         title: "提示"
@@ -40,6 +40,7 @@ ApplicationWindow {
         }
     }
 
+    //连接信号和槽
     Connections {
         target: utils
         function onShowMessageBox(message) {

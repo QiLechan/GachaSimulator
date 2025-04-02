@@ -3,6 +3,7 @@
 char* json = NULL;
 int global_count = 0;
 
+//抽卡线程类
 void Utils::GachaThead::gacha(int counts) {
 	GachaConfig* config = parse_config(json);
 	if (config == NULL) {
@@ -34,6 +35,8 @@ void Utils::GachaThead::run() {
 	qDebug() << "全局计数:" << global_count;
 	qDebug() << "线程执行完毕";
 }
+
+//处理文件
 void Utils::processFile(const QString& filePath) {
    QUrl url(filePath);
 
@@ -70,6 +73,7 @@ void Utils::processFile(const QString& filePath) {
     qDebug() << "C++ 读取文件成功:\n" << json;
 }
 
+//启动抽卡线程
 void Utils::run_gacha_thread(int counts) {
     if (json == NULL) {
 		onMessageBoxShow("未选择配置文件");
@@ -82,6 +86,7 @@ void Utils::run_gacha_thread(int counts) {
 	thread->wait();
 }
 
+//清除已加载文件
 void Utils::closeFile() {
     if (json != NULL)
         json = NULL;
@@ -90,6 +95,7 @@ void Utils::closeFile() {
     }
 }
 
+//向前端发送显示消息框信号
 void Utils::onMessageBoxShow(const QString& message) {
 	emit showMessageBox(message);    //转发信号
 }

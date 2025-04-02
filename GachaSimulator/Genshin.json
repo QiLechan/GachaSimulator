@@ -9,6 +9,7 @@
 	},
 	"pools":	[{
 			"pool_name":	"常驻祈愿",
+			"pool_backgound":	"卡池背景",
 			"pool_type":	"角色",
 			"rates":	{
 				"5star_soft_pity_start":	74,

@@ -71,6 +71,18 @@ void Utils::processFile(const QString& filePath) {
     fread(json, sizeof(char), len + 1, fp);
     fclose(fp);
     qDebug() << "C++ 读取文件成功:\n" << json;
+    GachaConfig* config = parse_config(json);
+    int pool_count = config->pool_count;
+    GachaPool* pools = (GachaPool*)malloc(sizeof(GachaPool) * pool_count);
+	char* pool_background = (char*)malloc(sizeof(char) * 50 * pool_count);
+    for (int i = 0; i < pool_count; i++)
+    {
+		pools[i] = config->pools[i];
+        pool_background = config->pools[i].pool_background;
+		qDebug() << "卡池" << i << "的名称:" << pools[i].pool_name;
+    }
+	QString pool_background_path = QString::fromUtf8(&pool_background[0]);
+	setImagePath(pool_background_path);
 }
 
 //启动抽卡线程
@@ -92,6 +104,17 @@ void Utils::closeFile() {
         json = NULL;
     else {
         qDebug() << "未打开文件";
+    }
+}
+
+QString Utils::imagePath() const {
+	return ImagePath;
+}
+
+void Utils::setImagePath(const QString& path) {
+    if (ImagePath != path) {
+        ImagePath = path;
+        emit imagePathChanged();
     }
 }
 

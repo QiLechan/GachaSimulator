@@ -13,7 +13,9 @@ using namespace std;
 
 class Utils : public QObject {
 	Q_OBJECT
+	Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath NOTIFY imagePathChanged)
 private:
+	QString ImagePath;
 	class GachaThead : public QThread {    //定义抽卡线程类
 	private:
 		int counts = NULL;
@@ -30,8 +32,13 @@ public:
 	Q_INVOKABLE void processFile(const QString& filePath);
 	Q_INVOKABLE void run_gacha_thread(int counts);
 	Q_INVOKABLE void closeFile();
+	QString imagePath() const;
 signals:
-	void showMessageBox(const QString& message);    //定义信号
+	//定义信号
+	void showMessageBox(const QString& message);
+	void imagePathChanged();
 public slots:
-	void onMessageBoxShow(const QString& message);  //定义槽
+	//定义槽
+	void onMessageBoxShow(const QString& message);
+	void setImagePath(const QString& path);
 };

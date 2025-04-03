@@ -23,6 +23,7 @@ extern "C"
 
     typedef struct {
         char pool_name[50];
+        char pool_background[50];
         char pool_type[20];
 
         int soft_pity_start;

@@ -166,4 +166,12 @@ ApplicationWindow {
             font.pixelSize: 24   
         }
     }
+    Image {
+        id: imgViewer
+        anchors.centerIn: parent
+        source: utils.imagePath
+        width: 400
+        height: 300
+        fillMode: Image.PreserveAspectFit
+    }
 }

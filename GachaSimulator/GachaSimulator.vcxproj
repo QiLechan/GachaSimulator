@@ -37,7 +37,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.8.2_msvc2022_64</QtInstall>
-    <QtModules>quick</QtModules>
+    <QtModules>quick;multimedia</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
     <QtQMLDebugEnable>true</QtQMLDebugEnable>
     <QtHeaderSearchPath>$(QTDIR)\include;$(QtHeaderSearchPath)</QtHeaderSearchPath>

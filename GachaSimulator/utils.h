@@ -16,6 +16,8 @@ class Utils : public QObject {
 	Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath NOTIFY imagePathChanged)
 private:
 	QString ImagePath;
+	QString VideoPath;
+	static int Highest_quality;    //本次抽卡的最高品质，用于确定播放的动画
 	class GachaThead : public QThread {    //定义抽卡线程类
 	private:
 		int counts = NULL;
@@ -33,6 +35,8 @@ public:
 	Q_INVOKABLE void run_gacha_thread(int counts);
 	Q_INVOKABLE void closeFile();
 	QString imagePath() const;
+	QString videoPath() const;
+	void setVideoPath(int n);
 signals:
 	//定义信号
 	void showMessageBox(const QString& message);

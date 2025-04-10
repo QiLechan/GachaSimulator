@@ -2,6 +2,7 @@
 
 char* json = NULL;
 int global_count = 0;
+int Utils::Highest_quality = 0;
 
 //抽卡线程类
 void Utils::GachaThead::gacha(int counts) {
@@ -17,6 +18,10 @@ void Utils::GachaThead::gacha(int counts) {
         int result = Gacha(prob);
         Item* item = return_Item(&config->pools[0], result, up5star_ptr);
 		qDebug() << "第" << global_count << "次抽卡结果:" << item->name;
+		if (Highest_quality < result) {
+			Highest_quality = result;
+			qDebug() << "当前最高品质:" << Highest_quality;
+		}
         if (result == 5)
             global_count = 0;
 		parse_result(item, fp);
@@ -85,6 +90,30 @@ void Utils::processFile(const QString& filePath) {
 	setImagePath(pool_background_path);
 }
 
+//设置音频路径
+void Utils::setVideoPath(int n) {
+    switch (n)
+    {
+	case 4:    //单抽+3星
+		VideoPath = "qrc:/qt/qml/gachasimulator/resource/one_3star.mp4";
+		break;
+	case 5:    //单抽+4星
+		VideoPath = "qrc:/qt/qml/gachasimulator/resource/one_4star.mp4";
+		break;
+	case 6:    //单抽+5星
+		VideoPath = "qrc:/qt/qml/gachasimulator/resource/one_5star.mp4";
+		break;
+	case 14:   //十连+4星
+		VideoPath = "qrc:/qt/qml/gachasimulator/resource/ten_4star.mp4";
+		break;
+	case 15:   //十连+5星
+		VideoPath = "qrc:/qt/qml/gachasimulator/resource/ten_5star.mp4";
+		break;
+    default:
+        break;
+    }
+}
+
 //启动抽卡线程
 void Utils::run_gacha_thread(int counts) {
     if (json == NULL) {
@@ -92,10 +121,15 @@ void Utils::run_gacha_thread(int counts) {
 		qDebug() << "未打开文件";
 		return;
     }
+	Highest_quality = 0;    //每次抽卡前将最高品质清零
     GachaThead* thread = new GachaThead();
     thread->setCounts(counts);
     thread->start(); 
 	thread->wait();
+	setVideoPath(Highest_quality + counts);
+	qDebug() << "线程执行完毕";
+	delete thread;
+	qDebug() << "线程已删除";
 }
 
 //清除已加载文件
@@ -109,6 +143,10 @@ void Utils::closeFile() {
 
 QString Utils::imagePath() const {
 	return ImagePath;
+}
+
+QString Utils::videoPath() const {
+	return VideoPath;
 }
 
 void Utils::setImagePath(const QString& path) {

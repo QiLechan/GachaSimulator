@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.Controls
 import QtQml
+import QtMultimedia
 import utils 1.0
 
 ApplicationWindow {
@@ -156,6 +157,8 @@ ApplicationWindow {
                 anchors.fill: parent
                 onClicked: {
                     utils.run_gacha_thread(1)
+                    videoOutput.visible = true
+                    mediaPlayer.play();
                 }
             }
         }
@@ -168,10 +171,28 @@ ApplicationWindow {
     }
     Image {
         id: imgViewer
-        anchors.centerIn: parent
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: oneButton.top
+            bottomMargin: -90
+        }
         source: utils.imagePath
-        width: 400
-        height: 300
+        width: 1000
+        height: 750
         fillMode: Image.PreserveAspectFit
+    }
+
+    MediaPlayer {
+        id: mediaPlayer
+        source: utils.audioPath
+        autoPlay: false
+        volume: 0.5
+    }
+
+    VideoOutput {
+        id: videoOutput
+        source: mediaPlayer
+        anchors.fill: parent
+        visible: false
     }
 }

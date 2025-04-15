@@ -125,6 +125,8 @@ ApplicationWindow {
                 anchors.fill: parent
                 onClicked: {
                     utils.run_gacha_thread(10)
+                    videoOutput.visible = true
+                    mediaPlayer.play();
                 }
             }
         }
@@ -184,15 +186,20 @@ ApplicationWindow {
 
     MediaPlayer {
         id: mediaPlayer
-        source: utils.audioPath
+        source: utils.videoPath
         autoPlay: false
-        volume: 0.5
+        videoOutput: videoOutput
+        onMediaStatusChanged: {
+            if (mediaStatus === MediaPlayer.EndOfMedia) {
+                videoOutput.visible = false // 播放结束隐藏
+            }
+        }
     }
 
     VideoOutput {
         id: videoOutput
-        source: mediaPlayer
         anchors.fill: parent
+        fillMode: VideoOutput.Stretch
         visible: false
     }
 }

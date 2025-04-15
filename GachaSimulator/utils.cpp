@@ -6,6 +6,7 @@ int Utils::Highest_quality = 0;
 
 //抽卡线程类
 void Utils::GachaThead::gacha(int counts) {
+	srand((unsigned int)time(NULL));
 	GachaConfig* config = parse_config(json);
 	if (config == NULL) {
 		qDebug() << "未选择配置文件";
@@ -13,8 +14,8 @@ void Utils::GachaThead::gacha(int counts) {
 	}
     fopen_s(&fp, "result.txt", "wb");
 	for (int i = 0; i < counts; i++) {
-        Probability* prob = probability(global_count, &config->global, &config->pools[0]);
 		global_count++;
+        Probability* prob = probability(global_count, &config->global, &config->pools[0]);
         int result = Gacha(prob);
         Item* item = return_Item(&config->pools[0], result, up5star_ptr);
 		qDebug() << "第" << global_count << "次抽卡结果:" << item->name;
@@ -90,7 +91,7 @@ void Utils::processFile(const QString& filePath) {
 	setImagePath(pool_background_path);
 }
 
-//设置音频路径
+//设置动画路径
 void Utils::setVideoPath(int n) {
     switch (n)
     {
@@ -112,6 +113,7 @@ void Utils::setVideoPath(int n) {
     default:
         break;
     }
+	emit videoPathChanged();
 }
 
 //启动抽卡线程

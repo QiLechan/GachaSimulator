@@ -14,6 +14,7 @@ using namespace std;
 class Utils : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath NOTIFY imagePathChanged)
+	Q_PROPERTY(QString videoPath READ videoPath NOTIFY videoPathChanged)
 private:
 	QString ImagePath;
 	QString VideoPath;
@@ -41,6 +42,7 @@ signals:
 	//定义信号
 	void showMessageBox(const QString& message);
 	void imagePathChanged();
+	void videoPathChanged();
 public slots:
 	//定义槽
 	void onMessageBoxShow(const QString& message);

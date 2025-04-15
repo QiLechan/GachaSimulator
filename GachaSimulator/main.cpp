@@ -9,8 +9,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
-    time_t t;
-    srand((unsigned)time(&t));
     FILE* fp;
     if (fopen_s(&fp, "Genshin.json", "rb") != 0)
     {

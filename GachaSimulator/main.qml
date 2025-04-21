@@ -184,14 +184,44 @@ ApplicationWindow {
         fillMode: Image.PreserveAspectFit
     }
 
+    Image {
+        id: gachaResultbg
+        source: "qrc:/qt/qml/gachasimulator/resource/splash-background.png"
+        fillMode: Image.PreserveAspectFit
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            verticalCenter: parent.verticalCenter
+        }
+        visible: false
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                gachaResultbg.visible = false // 点击时隐藏
+            }
+        }
+    }
+    
+    Image {
+        id: gachaResultcard
+        property string sourcePath: ""
+        property int xPos: 0
+        property int yPos: 0
+        x: xPos
+        y: yPos
+        source: sourcePath
+        fillMode: Image.PreserveAspectFit
+    }
+
     MediaPlayer {
         id: mediaPlayer
         source: utils.videoPath
         autoPlay: false
         videoOutput: videoOutput
+        audioOutput: audioOutput
         onMediaStatusChanged: {
             if (mediaStatus === MediaPlayer.EndOfMedia) {
                 videoOutput.visible = false // 播放结束隐藏
+                gachaResultbg.visible = true // 显示结果背景
             }
         }
     }
@@ -201,5 +231,18 @@ ApplicationWindow {
         anchors.fill: parent
         fillMode: VideoOutput.Stretch
         visible: false
+        MouseArea {
+            anchors.fill: parent
+            onPressed: {
+                mediaPlayer.stop();
+                videoOutput.visible = false // 点击时隐藏
+                gachaResultbg.visible = true // 显示结果背景
+            }
+        }
+    }
+
+    AudioOutput {
+        id: audioOutput
+        volume: 1.0
     }
 }

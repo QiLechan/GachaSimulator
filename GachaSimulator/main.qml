@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.Controls
@@ -172,13 +172,13 @@ ApplicationWindow {
         }
     }
     Image {
-        id: imgViewer
+        id: poolImage
         anchors {
             horizontalCenter: parent.horizontalCenter
             bottom: oneButton.top
             bottomMargin: -90
         }
-        source: utils.imagePath
+        source: utils.pool_bg
         width: 1000
         height: 750
         fillMode: Image.PreserveAspectFit
@@ -199,17 +199,32 @@ ApplicationWindow {
                 gachaResultbg.visible = false // 点击时隐藏
             }
         }
+        onVisibleChanged: {
+            if (visible) { // 仅在变为 true 时触发
+                gachaResultcard.visible = true // 显示结果卡片
+            }
+        }
     }
     
-    Image {
+    Item {
         id: gachaResultcard
-        property string sourcePath: ""
-        property int xPos: 0
-        property int yPos: 0
-        x: xPos
-        y: yPos
-        source: sourcePath
-        fillMode: Image.PreserveAspectFit
+        visible: false
+        Image {
+            id: gachaResultcardbg
+            property int xPos: 0
+            property int yPos: 0
+            x: xPos
+            y: yPos
+            source: "qrc:/qt/qml/gachasimulator/resource/resultcard-bg.png"
+            fillMode: Image.PreserveAspectFit
+        }
+        Image {
+            id: gachaResultcardimg
+            source: utils.card_img
+            fillMode: Image.PreserveAspectFit
+            x: gachaResultcardbg.x
+            y: gachaResultcardbg.y
+        }
     }
 
     MediaPlayer {

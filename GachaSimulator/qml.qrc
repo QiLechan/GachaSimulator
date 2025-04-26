@@ -8,7 +8,7 @@
         <file>resource/ten_4star.mp4</file>
         <file>resource/ten_5star.mp4</file>
         <file>resource/background.png</file>
-        <file>resource/resultcard-bg.svg</file>
         <file>resource/splash-background.png</file>
+        <file>resource/resultcard-bg.png</file>
     </qresource>
 </RCC>

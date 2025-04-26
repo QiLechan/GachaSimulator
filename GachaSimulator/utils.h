@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <QObject>
 #include <QFile>
 #include <QDebug> 
@@ -13,11 +13,13 @@ using namespace std;
 
 class Utils : public QObject {
 	Q_OBJECT
-	Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath NOTIFY imagePathChanged)
+	Q_PROPERTY(QString pool_bg READ pool_bg WRITE setPool_bg_Path NOTIFY pool_bg_PathChanged)
 	Q_PROPERTY(QString videoPath READ videoPath NOTIFY videoPathChanged)
+	Q_PROPERTY(QString card_img READ card_img WRITE setCard_img_Path NOTIFY card_img_PathChanged)
 private:
-	QString ImagePath;
+	QString Pool_bg_Path;
 	QString VideoPath;
+	QString card_img_Path;
 	static int Highest_quality;    //本次抽卡的最高品质，用于确定播放的动画
 	class GachaThead : public QThread {    //定义抽卡线程类
 	private:
@@ -35,16 +37,19 @@ public:
 	Q_INVOKABLE void processFile(const QString& filePath);
 	Q_INVOKABLE void run_gacha_thread(int counts);
 	Q_INVOKABLE void closeFile();
-	QString imagePath() const;
+	QString pool_bg() const;
 	QString videoPath() const;
+	QString card_img() const;
 	void setVideoPath(int n);
 signals:
 	//定义信号
 	void showMessageBox(const QString& message);
-	void imagePathChanged();
+	void pool_bg_PathChanged();
 	void videoPathChanged();
+	void card_img_PathChanged();
 public slots:
 	//定义槽
 	void onMessageBoxShow(const QString& message);
-	void setImagePath(const QString& path);
+	void setPool_bg_Path(const QString& path);
+	void setCard_img_Path(const QString& path);
 };

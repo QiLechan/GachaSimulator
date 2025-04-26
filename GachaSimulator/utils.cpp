@@ -1,4 +1,4 @@
-#include "utils.h"
+﻿#include "utils.h"
 
 char* json = NULL;
 int global_count = 0;
@@ -80,7 +80,7 @@ void Utils::processFile(const QString& filePath) {
     GachaConfig* config = parse_config(json);
     int pool_count = config->pool_count;
     GachaPool* pools = (GachaPool*)malloc(sizeof(GachaPool) * pool_count);
-	char* pool_background = (char*)malloc(sizeof(char) * 50 * pool_count);
+	char* pool_background = (char*)malloc(sizeof(char) * 100 * pool_count);
     for (int i = 0; i < pool_count; i++)
     {
 		pools[i] = config->pools[i];
@@ -88,7 +88,13 @@ void Utils::processFile(const QString& filePath) {
 		qDebug() << "卡池" << i << "的名称:" << pools[i].pool_name;
     }
 	QString pool_background_path = QString::fromUtf8(&pool_background[0]);
-	setImagePath(pool_background_path);
+	setPool_bg_Path(pool_background_path);
+
+	//测试抽卡卡片图片加载
+	char* card_img = (char*)malloc(sizeof(char) * 100);
+	card_img = config->pools[0].star5_up->pic_path;
+	QString card_img_path = QString::fromUtf8(card_img);
+	setCard_img_Path(card_img_path);
 }
 
 //设置动画路径
@@ -143,19 +149,30 @@ void Utils::closeFile() {
     }
 }
 
-QString Utils::imagePath() const {
-	return ImagePath;
+QString Utils::pool_bg() const {
+	return Pool_bg_Path;
 }
 
 QString Utils::videoPath() const {
 	return VideoPath;
 }
 
-void Utils::setImagePath(const QString& path) {
-    if (ImagePath != path) {
-        ImagePath = path;
-        emit imagePathChanged();
+QString Utils::card_img() const {
+	return card_img_Path;
+}
+
+void Utils::setPool_bg_Path(const QString& path) {
+	if (Pool_bg_Path != path) {
+		Pool_bg_Path = path;
+		emit pool_bg_PathChanged();
     }
+}
+
+void Utils::setCard_img_Path(const QString& path) {
+	if (card_img_Path != path) {
+		card_img_Path = path;
+		emit card_img_PathChanged();
+	}
 }
 
 //向前端发送显示消息框信号

@@ -91,10 +91,14 @@ void Utils::processFile(const QString& filePath) {
 	setPool_bg_Path(pool_background_path);
 
 	//测试抽卡卡片图片加载
+	card_img_Path = (QString**)malloc(sizeof(QString*) * 10);
+	for (int i = 0; i < 10; i++) {
+		card_img_Path[i] = new QString();
+	}
 	char* card_img = (char*)malloc(sizeof(char) * 100);
 	card_img = config->pools[0].star5_up->pic_path;
 	QString card_img_path = QString::fromUtf8(card_img);
-	setCard_img_Path(card_img_path);
+	setCard_img_Path(card_img_path, 0);
 }
 
 //设置动画路径
@@ -157,9 +161,9 @@ QString Utils::videoPath() const {
 	return VideoPath;
 }
 
-QString Utils::card_img() const {
-	return card_img_Path;
-}
+//QString Utils::card_img() const {
+//	return card_img_Path;
+//}
 
 void Utils::setPool_bg_Path(const QString& path) {
 	if (Pool_bg_Path != path) {
@@ -168,11 +172,17 @@ void Utils::setPool_bg_Path(const QString& path) {
     }
 }
 
-void Utils::setCard_img_Path(const QString& path) {
-	if (card_img_Path != path) {
-		card_img_Path = path;
-		emit card_img_PathChanged();
-	}
+void Utils::setCard_img_Path(QString path, int n) {
+	card_img_Path[n] = &path;
+	emit card_img_PathChanged();
+}
+
+QString Utils::get_card_img_path(int n) {  
+   if (card_img_Path == NULL) {  
+       qDebug() << "卡片图片路径未设置";  
+       return QString(); // 返回空的 QString  
+   }  
+   return *(card_img_Path[n]); // 解引用指针以返回 QString  
 }
 
 //向前端发送显示消息框信号

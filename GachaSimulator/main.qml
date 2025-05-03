@@ -4,6 +4,7 @@ import QtQuick.Dialogs
 import QtQuick.Controls
 import QtQml
 import QtMultimedia
+import Qt5Compat.GraphicalEffects
 import utils 1.0
 
 ApplicationWindow {
@@ -48,6 +49,13 @@ ApplicationWindow {
             console.log(message);
             messagedialog.messageText = message;
             messagedialog.open();
+        }
+    }
+
+    Connections {
+        target: utils
+        function onCard_img_PathChanged() {
+            container.refreshAllCards();
         }
     }
 
@@ -201,31 +209,76 @@ ApplicationWindow {
         }
         onVisibleChanged: {
             if (visible) { // 仅在变为 true 时触发
-                gachaResultcard.visible = true // 显示结果卡片
+                container.allCardsVisible = true // 显示结果卡片
             }
         }
     }
-    
-    Item {
-        id: gachaResultcard
-        visible: false
-        Image {
-            id: gachaResultcardbg
-            property int xPos: 0
-            property int yPos: 0
-            x: xPos
-            y: yPos
-            source: "qrc:/qt/qml/gachasimulator/resource/resultcard-bg.png"
-            fillMode: Image.PreserveAspectFit
-        }
-        Image {
-            id: gachaResultcardimg
-            source: utils.card_img
-            fillMode: Image.PreserveAspectFit
-            x: gachaResultcardbg.x
-            y: gachaResultcardbg.y
+
+Item {
+    id: container
+    property bool allCardsVisible: false
+    anchors.fill: parent
+    function refreshAllCards() {
+        for (var i = 0; i < repeater.count; i++) {
+            var card = repeater.itemAt(i);
+            if (card) {
+                card.refreshSource();
+            }
         }
     }
+    Component {
+        id: gachaResultCard
+        Item {
+            id: gachaResultcard
+            // 固定卡片尺寸
+            width: 142
+            height: 614
+            visible: container.allCardsVisible  // 绑定统一可见性
+
+            function refreshSource() {
+                gachaResultcardimg.refreshSource();
+            }
+    
+            Image {
+                id: gachaResultcardbg
+                anchors.fill: parent
+                source: "qrc:/qt/qml/gachasimulator/resource/resultcard-bg.png"
+                fillMode: Image.PreserveAspectFit
+            }
+
+            Image {
+                id: gachaResultcardimg
+                source: ""
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectCrop
+                function refreshSource() {
+                    source = utils.get_card_img_path(0)
+                }
+                scale: 2
+                visible: false
+            }
+
+            OpacityMask {
+                anchors.fill: parent
+                source: gachaResultcardimg
+                maskSource: gachaResultcardbg
+            }
+        }
+    }
+
+    // 使用 Row 布局水平排列
+    Row {
+        spacing: 0 // 卡片间距
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        height: parent.height
+        Repeater {
+            id: repeater
+            model: 10
+            delegate: gachaResultCard
+        }
+    }
+}
 
     MediaPlayer {
         id: mediaPlayer

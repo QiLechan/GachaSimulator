@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <QObject>
+#include <QList>
 #include <QFile>
 #include <QDebug> 
 #include <QByteArray>
@@ -18,7 +19,7 @@ class Utils : public QObject {
 private:
 	QString Pool_bg_Path;
 	QString VideoPath;
-	QString** card_img_Path = NULL;    //卡片图片路径
+	static QList<QString> card_img_Path;    //卡片图片路径
 	static int Highest_quality;    //本次抽卡的最高品质，用于确定播放的动画
 	class GachaThead : public QThread {    //定义抽卡线程类
 	private:
@@ -39,7 +40,7 @@ public:
 	Q_INVOKABLE QString get_card_img_path(int n);
 	QString pool_bg() const;
 	QString videoPath() const;
-	void setCard_img_Path(QString path, int n);
+	static void setCard_img_Path(QString path, int n);
 	void setVideoPath(int n);
 signals:
 	//定义信号

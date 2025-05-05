@@ -135,6 +135,7 @@ ApplicationWindow {
                     utils.run_gacha_thread(10)
                     videoOutput.visible = true
                     mediaPlayer.play();
+                    container.refreshAllCards();
                 }
             }
         }
@@ -230,13 +231,15 @@ Item {
         id: gachaResultCard
         Item {
             id: gachaResultcard
-            // 固定卡片尺寸
+            // 通过 property 接收外部传递的序号
+            property int cardIndex: index // 这里捕获 Repeater 的 index
             width: 142
             height: 614
-            visible: container.allCardsVisible  // 绑定统一可见性
+            visible: container.allCardsVisible
 
             function refreshSource() {
-                gachaResultcardimg.refreshSource();
+                // 使用 cardIndex 替代固定值 0
+                gachaResultcardimg.refreshSource(cardIndex);
             }
     
             Image {
@@ -251,8 +254,9 @@ Item {
                 source: ""
                 anchors.fill: parent
                 fillMode: Image.PreserveAspectCrop
-                function refreshSource() {
-                    source = utils.get_card_img_path(0)
+                // 修改函数接收动态索引参数
+                function refreshSource(idx) {
+                    source = utils.get_card_img_path(idx)
                 }
                 scale: 2
                 visible: false
@@ -266,15 +270,15 @@ Item {
         }
     }
 
-    // 使用 Row 布局水平排列
     Row {
-        spacing: 0 // 卡片间距
+        spacing: 0
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         height: parent.height
         Repeater {
             id: repeater
             model: 10
+            // 这里 delegate 会自动携带 index 属性
             delegate: gachaResultCard
         }
     }

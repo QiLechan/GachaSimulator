@@ -32,7 +32,7 @@
 						"name": "四星UP角色",
 						"id": 20001,
 						"weight": 5000,
-						"pic_path":	""
+						"pic_path": "file:///D:/code/GachaSimulator/GachaSimulator/resource/card/4star/favonius-sword.png"
 					}
 				]
 			},
@@ -42,7 +42,7 @@
 						"name": "五星角色",
 						"id": 10001,
 						"weight": 5000,
-						"pic_path":	""
+						"pic_path": "file:///D:/code/GachaSimulator/GachaSimulator/resource/card/4star/favonius-sword.png"
 					}
 				],
 				"4star": [
@@ -50,7 +50,7 @@
 						"name": "四星角色",
 						"id": 10001,
 						"weight": 5000,
-						"pic_path":	""
+						"pic_path": "file:///D:/code/GachaSimulator/GachaSimulator/resource/card/4star/favonius-sword.png"
 					}
 				],
 				"3star": [
@@ -58,7 +58,7 @@
 						"name": "三星物品",
 						"id": 30001,
 						"weight": 10000,
-						"pic_path":	""
+						"pic_path": "file:///D:/code/GachaSimulator/GachaSimulator/resource/card/3star/cool-steel.png"
 					}
 				]
 			}

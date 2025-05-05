@@ -3,6 +3,7 @@
 char* json = NULL;
 int global_count = 0;
 int Utils::Highest_quality = 0;
+QList<QString> Utils::card_img_Path;    //卡片图片路径
 
 //抽卡线程类
 void Utils::GachaThead::gacha(int counts) {
@@ -18,6 +19,10 @@ void Utils::GachaThead::gacha(int counts) {
         Probability* prob = probability(global_count, &config->global, &config->pools[0]);
         int result = Gacha(prob);
         Item* item = return_Item(&config->pools[0], result, up5star_ptr);
+		char* card_img = (char*)malloc(sizeof(char) * 100);
+		card_img = item->pic_path;
+		QString card_img_path = QString::fromUtf8(card_img);
+		setCard_img_Path(card_img_path, i);
 		qDebug() << "第" << global_count << "次抽卡结果:" << item->name;
 		if (Highest_quality < result) {
 			Highest_quality = result;
@@ -91,14 +96,7 @@ void Utils::processFile(const QString& filePath) {
 	setPool_bg_Path(pool_background_path);
 
 	//测试抽卡卡片图片加载
-	card_img_Path = (QString**)malloc(sizeof(QString*) * 10);
-	for (int i = 0; i < 10; i++) {
-		card_img_Path[i] = new QString();
-	}
-	char* card_img = (char*)malloc(sizeof(char) * 100);
-	card_img = config->pools[0].star5_up->pic_path;
-	QString card_img_path = QString::fromUtf8(card_img);
-	setCard_img_Path(card_img_path, 0);
+	card_img_Path.resize(10);
 }
 
 //设置动画路径
@@ -173,16 +171,11 @@ void Utils::setPool_bg_Path(const QString& path) {
 }
 
 void Utils::setCard_img_Path(QString path, int n) {
-	card_img_Path[n] = &path;
-	emit card_img_PathChanged();
+	card_img_Path[n] = path; // 将路径添加到 QList 中
 }
 
-QString Utils::get_card_img_path(int n) {  
-   if (card_img_Path == NULL) {  
-       qDebug() << "卡片图片路径未设置";  
-       return QString(); // 返回空的 QString  
-   }  
-   return *(card_img_Path[n]); // 解引用指针以返回 QString  
+QString Utils::get_card_img_path(int n) {   
+	return card_img_Path[n];
 }
 
 //向前端发送显示消息框信号

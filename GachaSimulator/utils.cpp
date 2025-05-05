@@ -94,8 +94,7 @@ void Utils::processFile(const QString& filePath) {
     }
 	QString pool_background_path = QString::fromUtf8(&pool_background[0]);
 	setPool_bg_Path(pool_background_path);
-
-	//测试抽卡卡片图片加载
+	//初始化卡片图片List
 	card_img_Path.resize(10);
 }
 
@@ -158,10 +157,6 @@ QString Utils::pool_bg() const {
 QString Utils::videoPath() const {
 	return VideoPath;
 }
-
-//QString Utils::card_img() const {
-//	return card_img_Path;
-//}
 
 void Utils::setPool_bg_Path(const QString& path) {
 	if (Pool_bg_Path != path) {

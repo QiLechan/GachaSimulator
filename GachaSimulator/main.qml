@@ -135,6 +135,7 @@ ApplicationWindow {
                     utils.run_gacha_thread(10)
                     videoOutput.visible = true
                     mediaPlayer.play();
+                    container.cardCount = 10 // 设置卡片数量
                     container.refreshAllCards();
                 }
             }
@@ -170,6 +171,8 @@ ApplicationWindow {
                     utils.run_gacha_thread(1)
                     videoOutput.visible = true
                     mediaPlayer.play();
+                    container.cardCount = 1 // 设置卡片数量
+                    container.refreshAllCards();
                 }
             }
         }
@@ -206,6 +209,7 @@ ApplicationWindow {
             anchors.fill: parent
             onClicked: {
                 gachaResultbg.visible = false // 点击时隐藏
+                container.allCardsVisible = false // 隐藏结果卡片
             }
         }
         onVisibleChanged: {
@@ -218,6 +222,7 @@ ApplicationWindow {
 Item {
     id: container
     property bool allCardsVisible: false
+    property int cardCount: 10
     anchors.fill: parent
     function refreshAllCards() {
         for (var i = 0; i < repeater.count; i++) {
@@ -233,8 +238,8 @@ Item {
             id: gachaResultcard
             // 通过 property 接收外部传递的序号
             property int cardIndex: index // 这里捕获 Repeater 的 index
-            width: 142
-            height: 614
+            width: 95
+            height: 409
             visible: container.allCardsVisible
 
             function refreshSource() {
@@ -277,8 +282,7 @@ Item {
         height: parent.height
         Repeater {
             id: repeater
-            model: 10
-            // 这里 delegate 会自动携带 index 属性
+            model: container.cardCount
             delegate: gachaResultCard
         }
     }

@@ -124,11 +124,11 @@ void Utils::setVideoPath(int n) {
 }
 
 //启动抽卡线程
-void Utils::run_gacha_thread(int counts) {
+int Utils::run_gacha_thread(int counts) {
     if (json == NULL) {
 		onMessageBoxShow("未选择配置文件");
 		qDebug() << "未打开文件";
-		return;
+		return 1;
     }
 	Highest_quality = 0;    //每次抽卡前将最高品质清零
     GachaThead* thread = new GachaThead();
@@ -139,6 +139,7 @@ void Utils::run_gacha_thread(int counts) {
 	qDebug() << "线程执行完毕";
 	delete thread;
 	qDebug() << "线程已删除";
+	return 0;
 }
 
 //清除已加载文件

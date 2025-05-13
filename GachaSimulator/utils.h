@@ -35,7 +35,7 @@ private:
 public:
 	explicit Utils(QObject* parent = nullptr) : QObject(parent) {};
 	Q_INVOKABLE void processFile(const QString& filePath);
-	Q_INVOKABLE void run_gacha_thread(int counts);
+	Q_INVOKABLE int run_gacha_thread(int counts);
 	Q_INVOKABLE void closeFile();
 	Q_INVOKABLE QString get_card_img_path(int n);
 	QString pool_bg() const;

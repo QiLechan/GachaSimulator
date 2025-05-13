@@ -114,7 +114,7 @@ ApplicationWindow {
         id: tenButton
         width: 267
         height: 66
-    
+
         anchors {
             right: parent.right
             bottom: parent.bottom
@@ -123,20 +123,24 @@ ApplicationWindow {
         }
 
         Image {
+            id: tenbuttonImage
             width: parent.width
             height: parent.height
             source: "qrc:/qt/qml/gachasimulator/resource/button.png"
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
+            property int success: 1    // 1表示抽卡失败，0表示成功
         
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    utils.run_gacha_thread(10)
-                    videoOutput.visible = true
-                    mediaPlayer.play();
-                    container.cardCount = 10 // 设置卡片数量
-                    container.refreshAllCards();
+                    tenbuttonImage.success = utils.run_gacha_thread(10)
+                    if (tenbuttonImage.success == 0){
+                        videoOutput.visible = true
+                        mediaPlayer.play();
+                        container.cardCount = 10 // 设置卡片数量
+                        container.refreshAllCards();
+                    }
                 }
             }
         }
@@ -147,6 +151,7 @@ ApplicationWindow {
             font.pixelSize: 24   
         }
     }
+
     Item {
         id: oneButton
         width: 267
@@ -159,20 +164,24 @@ ApplicationWindow {
         }
 
         Image {
+            id: onebuttonImage
             width: parent.width
             height: parent.height
             source: "qrc:/qt/qml/gachasimulator/resource/button.png"
             fillMode: Image.PreserveAspectFit
             anchors.centerIn: parent
+            property int success: 1
         
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    utils.run_gacha_thread(1)
-                    videoOutput.visible = true
-                    mediaPlayer.play();
-                    container.cardCount = 1 // 设置卡片数量
-                    container.refreshAllCards();
+                    onebuttonImage.success = utils.run_gacha_thread(1)
+                    if (onebuttonImage.success == 0){
+                        videoOutput.visible = true
+                        mediaPlayer.play();
+                        container.cardCount = 1 // 设置卡片数量
+                        container.refreshAllCards();
+                    }
                 }
             }
         }
